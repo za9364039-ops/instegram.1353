@@ -1,0 +1,416 @@
+﻿<!DOCTYPE html><html lang="en" class="dark"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile — Pulse</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">/** @type {import('tailwindcss').Config} */
+globalThis.tailwind = globalThis.tailwind || {};
+globalThis.tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'electric-purple': '#8B5CF6',
+        'neon-pink': '#EC4899',
+        'light-primary': '#6D28D9',
+        'light-on-primary': '#FFFFFF',
+        'light-secondary': '#BE185D',
+        'light-on-secondary': '#FFFFFF',
+        'light-surface': '#FAFAFC',
+        'light-on-surface': '#0F172A',
+        'light-surface-container': '#F1F5F9',
+        'light-on-surface-container': '#334155',
+        'light-outline': '#CBD5E1',
+        'light-outline-variant': '#E2E8F0',
+        'dark-primary': '#A78BFA',
+        'dark-on-primary': '#1E1145',
+        'dark-secondary': '#F472B6',
+        'dark-on-secondary': '#4C0519',
+        'dark-surface': '#0D0D12',
+        'dark-on-surface': '#F3F4F6',
+        'dark-surface-container': '#16161F',
+        'dark-on-surface-container': '#E5E7EB',
+        'dark-surface-container-high': '#22222E',
+        'dark-on-surface-container-high': '#FFFFFF',
+        'dark-outline': '#2E2E3E',
+        'dark-outline-variant': '#1E1E2A',
+      },
+      borderRadius: {
+        'sm': '6px',
+        'md': '10px',
+        'lg': '16px',
+        'xl': '20px',
+        'full': '9999px',
+      },
+      spacing: {
+        'xs': '4px',
+        'sm': '8px',
+        'md': '12px',
+        'base': '16px',
+        'lg': '20px',
+        'xl': '24px',
+        '2xl': '32px',
+        'gutter-mobile': '16px',
+        'nav-height': '64px',
+      },
+      fontFamily: {
+        'headline': ['"Red Hat Text"', 'sans-serif'],
+        'body': ['"Instrument Sans"', 'sans-serif'],
+        'label': ['"Instrument Sans"', 'sans-serif'],
+      },
+      fontSize: {
+        'headline-xl': ['36px', { lineHeight: '44px', letterSpacing: '-0.5px', fontWeight: '700' }],
+        'headline-xl-mobile': ['28px', { lineHeight: '34px', letterSpacing: '-0.4px', fontWeight: '700' }],
+        'headline-lg': ['30px', { lineHeight: '38px', letterSpacing: '-0.3px', fontWeight: '700' }],
+        'headline-lg-mobile': ['24px', { lineHeight: '30px', letterSpacing: '-0.2px', fontWeight: '700' }],
+        'headline-sm': ['18px', { lineHeight: '24px', fontWeight: '600' }],
+        'headline-sm-mobile': ['16px', { lineHeight: '22px', fontWeight: '600' }],
+        'body-lg': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+        'body-md': ['14px', { lineHeight: '20px', fontWeight: '400' }],
+        'body-sm': ['12px', { lineHeight: '16px', fontWeight: '400' }],
+        'label-lg': ['14px', { lineHeight: '20px', fontWeight: '600' }],
+        'label-md': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+        'label-sm': ['11px', { lineHeight: '14px', fontWeight: '600' }],
+      },
+      transitionDuration: {
+        'tap': '120ms',
+        'heart-pop': '200ms',
+        'drawer-slide': '250ms',
+      },
+      transitionDelay: {
+        'tap': '0ms',
+        'heart-pop': '0ms',
+        'drawer-slide': '0ms',
+      },
+      transitionTimingFunction: {
+        'tap': 'cubic-bezier(0.4, 0, 0.2, 1)',
+        'heart-pop': 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+        'drawer-slide': 'cubic-bezier(0.2, 0, 0, 1)',
+      },
+    },
+  },
+};
+if (typeof module !== 'undefined') module.exports = globalThis.tailwind.config;
+</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght,ital@400..700,0..1&amp;family=Red+Hat+Text:wght@400..700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+  <style>
+    .material-symbols-outlined, .material-symbols-rounded, .material-symbols-sharp, .material-icons {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      line-height: 1 !important;
+      box-sizing: content-box;
+      overflow: hidden;
+      white-space: nowrap;
+      direction: ltr;
+      vertical-align: middle;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-dark-surface text-dark-on-surface font-body antialiased selection:bg-electric-purple selection:text-white">
+
+  <!-- Mobile Viewport Frame (390px) -->
+  <div class="relative w-full max-w-[390px] mx-auto min-h-[884px] bg-dark-surface flex flex-col justify-between border-x border-dark-outline/40 shadow-2xl" data-stitch-vh="min-h-[884px]===min-h-screen">
+
+    <!-- Header: Status Bar & Profile Action Chrome -->
+    <header class="sticky top-0 z-30 w-full bg-dark-surface/90 backdrop-blur-md border-b border-dark-outline/40">
+      
+      <!-- iOS Status Bar -->
+      <div class="flex items-center justify-between px-6 pt-3 pb-1 text-label-sm text-dark-on-surface-container select-none">
+        <span class="tracking-tight text-dark-on-surface font-headline font-bold">9:41</span>
+        <div class="flex items-center gap-1.5 text-[14px]">
+          <span class="material-symbols-outlined text-[14px]">signal_cellular_alt</span>
+          <span class="material-symbols-outlined text-[14px]">wifi</span>
+          <span class="material-symbols-outlined text-[16px]">battery_full</span>
+        </div>
+      </div>
+
+      <!-- Profile Header Bar -->
+      <div class="flex items-center justify-between px-4 py-2.5">
+        <div class="flex items-center gap-1.5 cursor-pointer">
+          <span class="font-headline text-headline-sm-mobile font-bold text-dark-on-surface">kai.lens</span>
+          <span class="material-symbols-outlined text-[16px] text-dark-primary font-bold">verified</span>
+          <span class="material-symbols-outlined text-[18px] text-dark-on-surface-container">expand_more</span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Notification Bell -->
+          <button type="button" aria-label="Notifications" class="w-8 h-8 rounded-full flex items-center justify-center text-dark-on-surface hover:text-dark-primary transition-colors">
+            <span class="material-symbols-outlined text-[20px]">notifications</span>
+          </button>
+          <!-- More / Settings -->
+          <button type="button" aria-label="Settings" class="w-8 h-8 rounded-full flex items-center justify-center text-dark-on-surface hover:text-dark-primary transition-colors">
+            <span class="material-symbols-outlined text-[20px]">menu</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Profile Content -->
+    <main class="flex-1 pb-24">
+
+      <!-- Identity & Followers / Following Statistics Block -->
+      <section class="px-4 pt-4 pb-2" aria-label="Profile Info">
+        <div class="flex items-center justify-between gap-4">
+          
+          <!-- Avatar with Gradient Story Ring -->
+          <div class="relative shrink-0">
+            <div class="w-20 h-20 rounded-full p-xs bg-gradient-to-tr from-electric-purple to-neon-pink shadow-md">
+              <img src="https://lh3.googleusercontent.com/aida/ALJJyrA4600vQecTfr8yi1tix1EbWxbBUO98k5k41HV8Mmz1ZyNN9wFWmmHt7924tWcrPlN9UvjVZyJWY2KbUNXplu7GKaY0lj4l1shGJogZ5jbSbPckS7K8eqB6T2zSIsV9kcIB2KYqR-jid-E_EleSEsTZb1pd_Dljl5_MvUr_tCD9PLTqUjj52Pzxuj2lBl9G1mx9Bl5mDosa_CmuzUOzxoT7kFenuGCoozbsjHvnuc85EnWy" alt="Kai Lawrence" class="w-full h-full object-cover rounded-full">
+            </div>
+            <span class="absolute bottom-0 right-0 w-6 h-6 rounded-full bg-electric-purple text-white flex items-center justify-center ring-2 ring-dark-surface shadow-sm">
+              <span class="material-symbols-outlined text-[14px] font-bold" aria-hidden="true">add</span>
+            </span>
+          </div>
+
+          <!-- Social Counts: Posts, Followers, Following -->
+          <div class="flex-1 flex items-center justify-around text-center">
+            
+            <!-- Posts Count -->
+            <div class="flex flex-col cursor-pointer group">
+              <span class="font-headline text-headline-sm-mobile font-bold text-dark-on-surface group-hover:text-dark-primary tabular-nums">
+                142
+              </span>
+              <span class="text-label-sm font-semibold text-dark-on-surface-container">
+                Posts
+              </span>
+            </div>
+
+            <!-- Followers Count (عدد المتابعين) -->
+            <div class="flex flex-col cursor-pointer group">
+              <span class="font-headline text-headline-sm-mobile font-bold text-dark-on-surface group-hover:text-neon-pink tabular-nums">
+                24.8K
+              </span>
+              <span class="text-label-sm font-semibold text-dark-on-surface-container">
+                Followers
+              </span>
+            </div>
+
+            <!-- Following Count (المتابعة) -->
+            <div class="flex flex-col cursor-pointer group">
+              <span class="font-headline text-headline-sm-mobile font-bold text-dark-on-surface group-hover:text-dark-primary tabular-nums">
+                486
+              </span>
+              <span class="text-label-sm font-semibold text-dark-on-surface-container">
+                Following
+              </span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Name & Bio Section -->
+        <div class="mt-3.5 space-y-1">
+          <div class="flex items-center gap-1.5">
+            <h1 class="font-headline text-label-md font-bold text-dark-on-surface">Kai Lawrence</h1>
+            <span class="text-label-sm font-medium text-dark-on-surface-container">he/him</span>
+          </div>
+          <p class="text-body-sm text-dark-on-surface leading-relaxed">
+            Visual Storyteller &amp; Street Photographer 📷<br>
+            Capturing geometry, light, and urban rhythm across Tokyo &amp; Berlin.
+          </p>
+          <a href="#" class="inline-flex items-center gap-1 text-label-sm font-semibold text-dark-primary hover:underline pt-0.5">
+            <span class="material-symbols-outlined text-[14px]">link</span>
+            <span>kailawrence.photography</span>
+          </a>
+        </div>
+
+        <!-- Action Buttons (Edit Profile, Share Profile, Insights) -->
+        <div class="flex items-center gap-2 mt-4">
+          <button type="button" class="flex-1 py-1.5 rounded-lg bg-dark-surface-container border border-dark-outline hover:bg-dark-outline text-label-sm font-semibold text-dark-on-surface transition-colors active:scale-95">
+            Edit Profile
+          </button>
+          <button type="button" class="flex-1 py-1.5 rounded-lg bg-dark-surface-container border border-dark-outline hover:bg-dark-outline text-label-sm font-semibold text-dark-on-surface transition-colors active:scale-95">
+            Share Profile
+          </button>
+          <button type="button" aria-label="Add Contact" class="w-8 h-8 rounded-lg bg-dark-surface-container border border-dark-outline hover:bg-dark-outline flex items-center justify-center text-dark-on-surface transition-colors active:scale-95">
+            <span class="material-symbols-outlined text-[18px]">person_add</span>
+          </button>
+        </div>
+
+      </section>
+
+      <!-- Story Highlights Tray -->
+      <section class="py-3 border-y border-dark-outline/30 my-2 px-4" aria-label="Story Highlights">
+        <div class="flex items-center gap-4 overflow-x-auto no-scrollbar">
+          
+          <!-- Highlight 1: Travel -->
+          <div class="flex flex-col items-center gap-1.5 shrink-0 cursor-pointer group">
+            <div class="w-15 h-15 rounded-full p-xs ring-1 ring-dark-outline group-hover:ring-dark-primary transition-all overflow-hidden bg-dark-surface-container">
+              <img src="https://lh3.googleusercontent.com/aida/ALJJyrAmzei0tRx8NRiLnhepJA19v3hiqO2HWvtiEw61gXfYoFYST8Yec0I1C4HJutbuZspHAKLupW1ZGkaAurtjKMUSM_mxGYjD8tWCaToksrMnyZJDYGSkFYx05NPIdz77XsuowUOFlZULuEAkCrYtnBdhsY5dncU_6D1bIsUxUAU4mW6w-wO2I3I6vBtODKag3mUoeFb0ZAjNfHwxBcyNmi3xUE3Q6AlviPfFty0Wri8820f7uOudRuk-qI8" alt="Japan Travel Highlight" class="w-full h-full object-cover rounded-full">
+            </div>
+            <span class="text-label-sm font-semibold text-dark-on-surface">Japan 🏔️</span>
+          </div>
+
+          <!-- Highlight 2: 35mm Film -->
+          <div class="flex flex-col items-center gap-1.5 shrink-0 cursor-pointer group">
+            <div class="w-15 h-15 rounded-full p-xs ring-1 ring-dark-outline group-hover:ring-dark-primary transition-all overflow-hidden bg-dark-surface-container">
+              <img src="https://lh3.googleusercontent.com/aida/ALJJyrBoKUAbFD-T3liufAJWoEBjs-rtELzC8tESsdz2FJHmu6UI5XJ0OAhi-ynRjjHjSQHBB_gKHUbmwOv8ek_U95Yr_7m8EhpIJCm5KW77qXCuIXRikFIDBE4edzSFcLDR-h9rCdrVeLWSfnZoD_uvs3Xt3EV28-A3_moEQrh_upFZsasIyyKiPXkNZBYDO0ybVfIhBv9vHX-42vKn1kJsElSXo-1S9pVfvhc-icU2HrW8tU6BRHdlkbSKuw" alt="35mm Film Highlight" class="w-full h-full object-cover rounded-full">
+            </div>
+            <span class="text-label-sm font-semibold text-dark-on-surface">35mm Film</span>
+          </div>
+
+          <!-- Highlight 3: Architecture -->
+          <div class="flex flex-col items-center gap-1.5 shrink-0 cursor-pointer group">
+            <div class="w-15 h-15 rounded-full p-xs ring-1 ring-dark-outline group-hover:ring-dark-primary transition-all overflow-hidden bg-dark-surface-container">
+              <img src="https://lh3.googleusercontent.com/aida/ALJJyrDVqb_z2rysqlrgWqkW3u0rUThdSKPU6FwGom7Yk4mZpWFMfFzi0oP_CbgT8bEo8yfdHy9FJ8gA5JRzy7kzzQjxr_a_yfE-Ovce4TOYQ71AWCo-FouJQtOxXuCrlNQoLk-RQaW0LXwZ2t2FpXvsk4tEoWXpV9v-DZDe0_aGAbHzYf78UsIUm1CGPXBlBMdgKZlk0IGt-HVm7ylniubuRHoWfIFTQPdXj2Bmelu3oT04Eme2g0h88WQ" alt="Architecture Highlight" class="w-full h-full object-cover rounded-full">
+            </div>
+            <span class="text-label-sm font-semibold text-dark-on-surface">Geometry</span>
+          </div>
+
+          <!-- Highlight 4: New Highlight -->
+          <div class="flex flex-col items-center gap-1.5 shrink-0 cursor-pointer group">
+            <div class="w-15 h-15 rounded-full ring-1 ring-dashed ring-dark-outline group-hover:ring-dark-primary flex items-center justify-center bg-dark-surface-container transition-all">
+              <span class="material-symbols-outlined text-[20px] text-dark-on-surface-container">add</span>
+            </div>
+            <span class="text-label-sm font-semibold text-dark-on-surface-container">New</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Media Content Tabs (Grid, Reels, Saved, Tagged) -->
+      <div class="flex items-center justify-around border-b border-dark-outline/40">
+        <button type="button" class="flex-1 py-2.5 flex items-center justify-center text-dark-primary border-b-2 border-dark-primary" aria-label="Posts Grid">
+          <span class="material-symbols-outlined text-[22px]">grid_on</span>
+        </button>
+        <button type="button" class="flex-1 py-2.5 flex items-center justify-center text-dark-on-surface-container hover:text-dark-on-surface" aria-label="Reels Tab">
+          <span class="material-symbols-outlined text-[22px]">movie</span>
+        </button>
+        <button type="button" class="flex-1 py-2.5 flex items-center justify-center text-dark-on-surface-container hover:text-dark-on-surface" aria-label="Saved Tab">
+          <span class="material-symbols-outlined text-[22px]">bookmark</span>
+        </button>
+        <button type="button" class="flex-1 py-2.5 flex items-center justify-center text-dark-on-surface-container hover:text-dark-on-surface" aria-label="Tagged Posts">
+          <span class="material-symbols-outlined text-[22px]">assignment_ind</span>
+        </button>
+      </div>
+
+      <!-- 3-Column Photography Post Grid -->
+      <section class="grid grid-cols-3 gap-0.5 pt-0.5" aria-label="User Photos">
+        
+        <!-- Grid Photo 1: Pinned Skyscraper -->
+        <a href="#" class="relative aspect-square group overflow-hidden bg-dark-surface-container block">
+          <img src="https://lh3.googleusercontent.com/aida/ALJJyrDVqb_z2rysqlrgWqkW3u0rUThdSKPU6FwGom7Yk4mZpWFMfFzi0oP_CbgT8bEo8yfdHy9FJ8gA5JRzy7kzzQjxr_a_yfE-Ovce4TOYQ71AWCo-FouJQtOxXuCrlNQoLk-RQaW0LXwZ2t2FpXvsk4tEoWXpV9v-DZDe0_aGAbHzYf78UsIUm1CGPXBlBMdgKZlk0IGt-HVm7ylniubuRHoWfIFTQPdXj2Bmelu3oT04Eme2g0h88WQ" alt="Skyscraper architecture" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+          <div class="absolute top-1.5 right-1.5 text-white drop-shadow">
+            <span class="material-symbols-outlined text-[15px]">push_pin</span>
+          </div>
+        </a>
+
+        <!-- Grid Photo 2: Vintage Camera -->
+        <a href="#" class="relative aspect-square group overflow-hidden bg-dark-surface-container block">
+          <img src="https://lh3.googleusercontent.com/aida/ALJJyrC0PR9DvxagscYjA9pUg3QsgIyiiBMkr311Hsv3o6biKXM-ALtqietQzPyjXHvJoSu_T0wDw3e426gvMPHQLufPCYHMJSmi6Mib-QZryeNcirlo8Fl9Koum8SzmR_qfpZ9c-TLNHqCqNW1gN-7azDBM4Ncek80MvnCeyVQd7UtttcI2FzH670qpHM2CZy1huue2VP8ip2BYEC4TXoKID1VobPnjrpiAHn9hMIcWZLVnqqyWmiOvIZFp" alt="Vintage camera on cafe table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+        </a>
+
+        <!-- Grid Photo 3: Golden Hour Portrait -->
+        <a href="#" class="relative aspect-square group overflow-hidden bg-dark-surface-container block">
+          <img src="https://lh3.googleusercontent.com/aida/ALJJyrAfBxUEVu6sMkwKwdQvqaS3SBdg0VXcT3M3H7wwthIVV5Ox9b4L5dEbtYTzdCjYjLWCgIeLqScjDqbtn3zBklO0MmK1qF_7d5kjA7ZJVHWzCdKzwVprXcgEyCoKNt1DuHQ15m0IBT4VOIGEXaKGiN5n6h2Jh3DMXYuY5VVqcRQL8bQgHsULOF_dF7V6nsbYZOyV4XBaZwct4ycGyjthi2cpIA5MCAOLJGat_ahUS2idVcW75dc8sDg" alt="Golden hour portrait" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+        </a>
+
+        <!-- Grid Photo 4: Cyberpunk Night -->
+        <a href="#" class="relative aspect-square group overflow-hidden bg-dark-surface-container block">
+          <img src="https://lh3.googleusercontent.com/aida/ALJJyrCtMSge6y2BAtNd9EJRDErRJlJK-_a1J6p0pMY0bTLZ6455mG_9EvZBl8CT7t_dtdspapAVDT1FYTh3bLuxShMWE1ehp8jgzOfTEwVaIlwkn7TrUCGZHKLoeePXfGxQSdh5ymC_FsWuX2q-23sF4Zpt0o2eG1fbnr4yffyLzD6D39oOfeFPC-TcUzOf4s5SICocCfLeP4pKfp6pPCpfrsCrCgy6T1-jNRMkfGd4b287jVZxDlHaWi76oJC0kMJm" alt="Tokyo neon night" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+          <div class="absolute top-1.5 right-1.5 text-white drop-shadow">
+            <span class="material-symbols-outlined text-[15px]">filter_none</span>
+          </div>
+        </a>
+
+        <!-- Grid Photo 5: Editorial Studio -->
+        <a href="#" class="relative aspect-square group overflow-hidden bg-dark-surface-container block">
+          <img src="https://lh3.googleusercontent.com/aida/ALJJyrAWIc6RewGshEQVRowVp799U0_tK1N3gMIF4Olz9LydSrmHAx9VI2LgUTjIAMqZlS2ryx1RnEMNcwMr6p0EoKwW6cxU-QvSELQo-GzaXcMq-XiYNEoBQClWJD7OC1bk_IBs2lfUXG_Z_04zxx72tX6YolqQU56VSz-IkDRdpn2X2XFCn3eHXos1PSrFNXK6DEWMktyhzZT5YBMrs3SuW2MUM3Wp8b3mZJYg5D0ZuC3u9kEP2Svfe4it5L2yomYu" alt="Studio editorial portrait" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+        </a>
+
+        <!-- Grid Photo 6: Video Reel Cover -->
+        <a href="reels.html" class="relative aspect-square group overflow-hidden bg-dark-surface-container block">
+          <img src="https://lh3.googleusercontent.com/aida/ALJJyrDqKHciXNqq0FL6aGVz8f4JWSuJp5QLAv11StwOYk7OnDo7kHjO3XmDeafVD96WajDaRVgBmmRO4dufC86GL98CMLyGJKmQpIc5F6vlWuUO2DsEbCYxysWgG5PittkJo_b00Mf7LN39V4bTxZMEBg_ZuBj3QeCNI4VQXrzTvxK4KY8u46TGBOPrxr9Ui_WYDxnA-DCBWHujmGsJbjU5-_tZYheb3CBhncgLpxrG7PUpu4EosuJxDgG9-Q" alt="Street dancer reel" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+          <div class="absolute top-1.5 right-1.5 text-white drop-shadow">
+            <span class="material-symbols-outlined text-[15px]">play_arrow</span>
+          </div>
+        </a>
+
+        <!-- Grid Photo 7: Travel Mountains -->
+        <a href="#" class="relative aspect-square group overflow-hidden bg-dark-surface-container block">
+          <img src="https://lh3.googleusercontent.com/aida/ALJJyrAmzei0tRx8NRiLnhepJA19v3hiqO2HWvtiEw61gXfYoFYST8Yec0I1C4HJutbuZspHAKLupW1ZGkaAurtjKMUSM_mxGYjD8tWCaToksrMnyZJDYGSkFYx05NPIdz77XsuowUOFlZULuEAkCrYtnBdhsY5dncU_6D1bIsUxUAU4mW6w-wO2I3I6vBtODKag3mUoeFb0ZAjNfHwxBcyNmi3xUE3Q6AlviPfFty0Wri8820f7uOudRuk-qI8" alt="Mountain mist sunrise" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+        </a>
+
+        <!-- Grid Photo 8: Streetwear Photography -->
+        <a href="#" class="relative aspect-square group overflow-hidden bg-dark-surface-container block">
+          <img src="https://lh3.googleusercontent.com/aida/ALJJyrBFKgL0di2HF_qn5SPZGM7JnRPHBpPPHrHcnUS6oS6Mk-IdJYNgwtM63Ggsja-BR8LLVhncXLEQ-9rhIpGxngPbWvLYnGVC2Ol4zjjZXy-23Cr0s5duAZGIjq-AVCiPjT-tY2JBMxu9BTjO5Q8rca_BKWN5EwtL02AOmdY6bEN45CSmiseOxxQRQE5AOnd5AOKnM1-3uH_a-ePEYeqEXm9gjpDrZLpVg3Lvm70fZajZic-ZfunW-XT-_A" alt="Streetwear photography" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+        </a>
+
+        <!-- Grid Photo 9: Architecture Light -->
+        <a href="#" class="relative aspect-square group overflow-hidden bg-dark-surface-container block">
+          <img src="https://lh3.googleusercontent.com/aida/ALJJyrBtAWkQOAwY3YtjuuCcSlpUjoIy_XP8XLM290hs9NjFRWTsKnrlnfvuBXcONkB6suzQcybde_nXd42tgfp2FFfD2I3-Cv4ssB97mmAN3XrvuGoH7u32HXbZwvKGXpSjl5J1qHmdVhg9R_-n1wlDIF6UjNUvGykXTSSpHd0-8_ZnlD4eQd9xrbsx3jrw2zdVTr80IUUQTeFcOBCkcahM6daRrIi_mhAgz_RNmPeM82YxgwekkCLcLAOB" alt="Concrete museum architecture" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+        </a>
+
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar (Matched App Shell Parity, Profile Active) -->
+    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[390px] h-16 bg-dark-surface/95 backdrop-blur-xl border-t border-dark-outline/40 z-40 px-3 flex items-center justify-around" aria-label="Primary Navigation">
+      <a href="feed.html" class="flex flex-col items-center justify-center w-12 h-12 text-dark-on-surface-container hover:text-dark-on-surface" aria-label="Home Feed">
+        <span class="material-symbols-outlined text-[24px]">home</span>
+      </a>
+      <a href="explore.html" class="flex flex-col items-center justify-center w-12 h-12 text-dark-on-surface-container hover:text-dark-on-surface" aria-label="Search and Explore">
+        <span class="material-symbols-outlined text-[24px]">search</span>
+      </a>
+      <button type="button" aria-label="Create Post" class="w-11 h-11 rounded-full bg-gradient-to-tr from-electric-purple to-neon-pink text-white flex items-center justify-center shadow-lg shadow-electric-purple/40 -mt-2.5 cursor-pointer ring-4 ring-dark-surface">
+        <span class="material-symbols-outlined text-[22px] font-bold" aria-hidden="true">add</span>
+      </button>
+      <a href="reels.html" class="flex flex-col items-center justify-center w-12 h-12 text-dark-on-surface-container hover:text-dark-on-surface" aria-label="Reels">
+        <span class="material-symbols-outlined text-[24px]">movie</span>
+      </a>
+      <!-- Active Profile Tab with indicator ring and glow pip -->
+      <a href="#" class="relative flex flex-col items-center justify-center w-12 h-12 group" aria-current="page" aria-label="Your Profile">
+        <div class="w-7 h-7 rounded-full overflow-hidden ring-2 ring-dark-primary p-0.5">
+          <img src="https://lh3.googleusercontent.com/aida/ALJJyrA4600vQecTfr8yi1tix1EbWxbBUO98k5k41HV8Mmz1ZyNN9wFWmmHt7924tWcrPlN9UvjVZyJWY2KbUNXplu7GKaY0lj4l1shGJogZ5jbSbPckS7K8eqB6T2zSIsV9kcIB2KYqR-jid-E_EleSEsTZb1pd_Dljl5_MvUr_tCD9PLTqUjj52Pzxuj2lBl9G1mx9Bl5mDosa_CmuzUOzxoT7kFenuGCoozbsjHvnuc85EnWy" alt="Your avatar" class="w-full h-full object-cover rounded-full">
+        </div>
+        <span class="w-1 h-1 rounded-full bg-neon-pink mt-0.5"></span>
+      </a>
+    </nav>
+
+    <!-- Home Indicator -->
+    <div class="fixed bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/20 rounded-full z-50 pointer-events-none"></div>
+
+  </div>
+
+
+
+  <!-- Page Transition Script -->
+  <script>
+    (function() {
+      // Fade in on load
+      document.body.style.opacity = '0';
+      document.body.style.transform = 'translateY(10px)';
+      document.body.style.transition = 'opacity 0.28s ease, transform 0.28s ease';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          document.body.style.opacity = '1';
+          document.body.style.transform = 'translateY(0)';
+        });
+      });
+
+      // Intercept nav + back links
+      document.addEventListener('click', function(e) {
+        var link = e.target.closest('a[href]');
+        if (!link) return;
+        var href = link.getAttribute('href');
+        if (!href || href === '#' || href.startsWith('http') || href.startsWith('mailto')) return;
+        e.preventDefault();
+        // tap scale
+        link.style.transform = 'scale(0.88)';
+        setTimeout(function() { link.style.transform = ''; }, 150);
+        // fade out
+        document.body.style.opacity = '0';
+        document.body.style.transform = 'translateY(-8px)';
+        document.body.style.transition = 'opacity 0.18s ease, transform 0.18s ease';
+        setTimeout(function() { window.location.href = href; }, 200);
+      });
+    })();
+  </script>
+</body></html>

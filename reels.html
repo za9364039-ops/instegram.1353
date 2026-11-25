@@ -1,0 +1,289 @@
+﻿<!DOCTYPE html><html lang="en" class="dark"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reels — Pulse</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">/** @type {import('tailwindcss').Config} */
+globalThis.tailwind = globalThis.tailwind || {};
+globalThis.tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'electric-purple': '#8B5CF6',
+        'neon-pink': '#EC4899',
+        'light-primary': '#6D28D9',
+        'light-on-primary': '#FFFFFF',
+        'light-secondary': '#BE185D',
+        'light-on-secondary': '#FFFFFF',
+        'light-surface': '#FAFAFC',
+        'light-on-surface': '#0F172A',
+        'light-surface-container': '#F1F5F9',
+        'light-on-surface-container': '#334155',
+        'light-outline': '#CBD5E1',
+        'light-outline-variant': '#E2E8F0',
+        'dark-primary': '#A78BFA',
+        'dark-on-primary': '#1E1145',
+        'dark-secondary': '#F472B6',
+        'dark-on-secondary': '#4C0519',
+        'dark-surface': '#0D0D12',
+        'dark-on-surface': '#F3F4F6',
+        'dark-surface-container': '#16161F',
+        'dark-on-surface-container': '#E5E7EB',
+        'dark-surface-container-high': '#22222E',
+        'dark-on-surface-container-high': '#FFFFFF',
+        'dark-outline': '#2E2E3E',
+        'dark-outline-variant': '#1E1E2A',
+      },
+      borderRadius: {
+        'sm': '6px',
+        'md': '10px',
+        'lg': '16px',
+        'xl': '20px',
+        'full': '9999px',
+      },
+      spacing: {
+        'xs': '4px',
+        'sm': '8px',
+        'md': '12px',
+        'base': '16px',
+        'lg': '20px',
+        'xl': '24px',
+        '2xl': '32px',
+        'gutter-mobile': '16px',
+        'nav-height': '64px',
+      },
+      fontFamily: {
+        'headline': ['"Red Hat Text"', 'sans-serif'],
+        'body': ['"Instrument Sans"', 'sans-serif'],
+        'label': ['"Instrument Sans"', 'sans-serif'],
+      },
+      fontSize: {
+        'headline-xl': ['36px', { lineHeight: '44px', letterSpacing: '-0.5px', fontWeight: '700' }],
+        'headline-xl-mobile': ['28px', { lineHeight: '34px', letterSpacing: '-0.4px', fontWeight: '700' }],
+        'headline-lg': ['30px', { lineHeight: '38px', letterSpacing: '-0.3px', fontWeight: '700' }],
+        'headline-lg-mobile': ['24px', { lineHeight: '30px', letterSpacing: '-0.2px', fontWeight: '700' }],
+        'headline-sm': ['18px', { lineHeight: '24px', fontWeight: '600' }],
+        'headline-sm-mobile': ['16px', { lineHeight: '22px', fontWeight: '600' }],
+        'body-lg': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+        'body-md': ['14px', { lineHeight: '20px', fontWeight: '400' }],
+        'body-sm': ['12px', { lineHeight: '16px', fontWeight: '400' }],
+        'label-lg': ['14px', { lineHeight: '20px', fontWeight: '600' }],
+        'label-md': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+        'label-sm': ['11px', { lineHeight: '14px', fontWeight: '600' }],
+      },
+      transitionDuration: {
+        'tap': '120ms',
+        'heart-pop': '200ms',
+        'drawer-slide': '250ms',
+      },
+      transitionDelay: {
+        'tap': '0ms',
+        'heart-pop': '0ms',
+        'drawer-slide': '0ms',
+      },
+      transitionTimingFunction: {
+        'tap': 'cubic-bezier(0.4, 0, 0.2, 1)',
+        'heart-pop': 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+        'drawer-slide': 'cubic-bezier(0.2, 0, 0, 1)',
+      },
+    },
+  },
+};
+if (typeof module !== 'undefined') module.exports = globalThis.tailwind.config;
+</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght,ital@400..700,0..1&amp;family=Red+Hat+Text:wght@400..700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+  <style>
+    .material-symbols-outlined, .material-symbols-rounded, .material-symbols-sharp, .material-icons {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      line-height: 1 !important;
+      box-sizing: content-box;
+      overflow: hidden;
+      white-space: nowrap;
+      direction: ltr;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body class="bg-black text-dark-on-surface font-body antialiased selection:bg-electric-purple selection:text-white">
+
+  <!-- Mobile Viewport Frame (390px) -->
+  <div class="relative w-full max-w-[390px] mx-auto min-h-[884px] bg-black flex flex-col justify-between border-x border-dark-outline/40 shadow-2xl overflow-hidden" data-stitch-vh="min-h-[884px]===min-h-screen">
+
+    <!-- Fullscreen Video Reel Backdrop with Solid Legibility Scrim -->
+    <div class="absolute inset-0 z-0">
+      <img src="https://lh3.googleusercontent.com/aida/ALJJyrDqKHciXNqq0FL6aGVz8f4JWSuJp5QLAv11StwOYk7OnDo7kHjO3XmDeafVD96WajDaRVgBmmRO4dufC86GL98CMLyGJKmQpIc5F6vlWuUO2DsEbCYxysWgG5PittkJo_b00Mf7LN39V4bTxZMEBg_ZuBj3QeCNI4VQXrzTvxK4KY8u46TGBOPrxr9Ui_WYDxnA-DCBWHujmGsJbjU5-_tZYheb3CBhncgLpxrG7PUpu4EosuJxDgG9-Q" alt="Urban dancer moving under neon lights in rain" class="w-full h-full object-cover">
+      <!-- Strengthened dark gradient scrim ensuring WCAG AA contrast across all overlaid elements -->
+      <div class="absolute inset-0 bg-gradient-to-b from-black/75 via-black/25 to-black/95"></div>
+    </div>
+
+    <!-- Top Overlay Bar (Title & Camera) -->
+    <header class="relative z-20 w-full pt-3 px-6">
+      <!-- Status bar info -->
+      <div class="flex items-center justify-between pb-2 text-label-sm text-white/90 font-semibold select-none">
+        <span class="tracking-tight font-headline font-bold">9:41</span>
+        <div class="flex items-center gap-1.5 text-[14px]">
+          <span class="material-symbols-outlined text-[14px]">signal_cellular_alt</span>
+          <span class="material-symbols-outlined text-[14px]">wifi</span>
+          <span class="material-symbols-outlined text-[16px]">battery_full</span>
+        </div>
+      </div>
+
+      <!-- Reels Header Navigation -->
+      <div class="flex items-center justify-between py-2">
+        <div class="flex items-center gap-4">
+          <span class="font-headline text-headline-sm-mobile font-bold text-white tracking-tight">Reels</span>
+          <div class="flex items-center gap-3 text-label-sm font-semibold">
+            <span class="text-white border-b-2 border-neon-pink pb-0.5">Trending</span>
+            <span class="text-white/70 hover:text-white cursor-pointer">Following</span>
+          </div>
+        </div>
+        <button type="button" aria-label="Camera" class="w-9 h-9 rounded-full bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:text-dark-primary">
+          <span class="material-symbols-outlined text-[20px]">photo_camera</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Bottom Reel Details & Floating Right Social Actions -->
+    <main class="relative z-20 flex items-end justify-between px-4 pb-20 pt-10">
+
+      <!-- Left Creator Info & Audio Tag -->
+      <div class="flex-1 pr-4 space-y-3">
+        <!-- Creator Header & Follow -->
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-full p-xs bg-gradient-to-tr from-electric-purple to-neon-pink shadow-md">
+            <img src="https://lh3.googleusercontent.com/aida/ALJJyrB79w-PcHBq-VOOZnV6ekF3AzH9hV3jmth7PXj9IHJ7JQ8mJMch5CmUANAJ7AnAG3wCOxqQAym24AE6w7ptgxs2JxFaks1wFA2iAfEZMiPMCdlejqLB3MRDBj6Gpay256-QSd6IucabsjAOpqBohPDuWJJS05NqsJrNnqY6WgsbMQg2XSvjrmLFNR7GiSdB3llLe4Jg1evDCIq4_RmtOa6ZSaerHzcBzdEFY8qP7bl8G8WRgiYq" alt="Elena Vance" class="w-full h-full object-cover rounded-full">
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-headline text-label-md font-bold text-white">elena.design</span>
+              <button type="button" class="px-3 py-0.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white text-label-sm font-semibold hover:bg-neon-pink hover:border-neon-pink transition-all">
+                Follow
+              </button>
+            </div>
+            <p class="text-label-sm text-white font-medium drop-shadow-md">Tokyo Midnight Dance Project</p>
+          </div>
+        </div>
+
+        <!-- Reel Caption -->
+        <p class="text-body-sm text-white leading-relaxed font-normal drop-shadow-md">
+          Flowing through neon reflections in Shibuya rain ☔️✨ The rhythm between movement and electric architecture.
+        </p>
+
+        <!-- Audio Tag Pill with bouncing equalizer -->
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-label-sm text-white">
+          <span class="material-symbols-outlined text-[15px] text-neon-pink animate-pulse">music_note</span>
+          <span class="truncate max-w-[180px]">Kavinsky — Nightcall (Cyberpunk Remix)</span>
+        </div>
+      </div>
+
+      <!-- Right Floating Action Rail -->
+      <div class="flex flex-col items-center gap-4 pb-2">
+        
+        <!-- Like Button with Count -->
+        <button type="button" class="flex flex-col items-center gap-1 group" aria-label="Like reel">
+          <div class="w-11 h-11 rounded-full bg-black/60 backdrop-blur-md border border-white/15 flex items-center justify-center text-neon-pink group-hover:scale-110 active:scale-125 transition-transform duration-heart-pop shadow-lg">
+            <span class="material-symbols-outlined text-[26px]" style="font-variation-settings: &#39;FILL&#39; 1;">favorite</span>
+          </div>
+          <span class="text-label-sm font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">48.2K</span>
+        </button>
+
+        <!-- Comment Button with Count -->
+        <button type="button" class="flex flex-col items-center gap-1 group" aria-label="Comments">
+          <div class="w-11 h-11 rounded-full bg-black/60 backdrop-blur-md border border-white/15 flex items-center justify-center text-white group-hover:text-dark-primary group-hover:scale-110 transition-transform shadow-lg">
+            <span class="material-symbols-outlined text-[24px]">chat_bubble</span>
+          </div>
+          <span class="text-label-sm font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">1,208</span>
+        </button>
+
+        <!-- Share Button -->
+        <button type="button" class="flex flex-col items-center gap-1 group" aria-label="Share reel">
+          <div class="w-11 h-11 rounded-full bg-black/60 backdrop-blur-md border border-white/15 flex items-center justify-center text-white group-hover:text-dark-primary group-hover:scale-110 transition-transform shadow-lg">
+            <span class="material-symbols-outlined text-[24px]">send</span>
+          </div>
+          <span class="text-label-sm font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">Share</span>
+        </button>
+
+        <!-- Bookmark Button -->
+        <button type="button" class="flex flex-col items-center gap-1 group" aria-label="Save reel">
+          <div class="w-11 h-11 rounded-full bg-black/60 backdrop-blur-md border border-white/15 flex items-center justify-center text-white group-hover:text-dark-primary group-hover:scale-110 transition-transform shadow-lg">
+            <span class="material-symbols-outlined text-[24px]">bookmark</span>
+          </div>
+        </button>
+
+        <!-- Spinning Vinyl Disk for Audio -->
+        <div class="w-9 h-9 rounded-full ring-2 ring-electric-purple/80 overflow-hidden shadow-lg p-0.5 bg-black animate-spin" style="animation-duration: 4s;">
+          <img src="https://lh3.googleusercontent.com/aida/ALJJyrB79w-PcHBq-VOOZnV6ekF3AzH9hV3jmth7PXj9IHJ7JQ8mJMch5CmUANAJ7AnAG3wCOxqQAym24AE6w7ptgxs2JxFaks1wFA2iAfEZMiPMCdlejqLB3MRDBj6Gpay256-QSd6IucabsjAOpqBohPDuWJJS05NqsJrNnqY6WgsbMQg2XSvjrmLFNR7GiSdB3llLe4Jg1evDCIq4_RmtOa6ZSaerHzcBzdEFY8qP7bl8G8WRgiYq" alt="Audio Thumbnail" class="w-full h-full object-cover rounded-full">
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- Bottom Navigation Bar (Matched App Shell Parity, Reels Active) -->
+    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[390px] h-16 bg-black/90 backdrop-blur-xl border-t border-white/10 z-40 px-3 flex items-center justify-around" aria-label="Primary Navigation">
+      <a href="feed.html" class="flex flex-col items-center justify-center w-12 h-12 text-white/70 hover:text-white" aria-label="Home Feed">
+        <span class="material-symbols-outlined text-[24px]">home</span>
+      </a>
+      <a href="explore.html" class="flex flex-col items-center justify-center w-12 h-12 text-white/70 hover:text-white" aria-label="Search and Explore">
+        <span class="material-symbols-outlined text-[24px]">search</span>
+      </a>
+      <button type="button" aria-label="Create Post" class="w-11 h-11 rounded-full bg-gradient-to-tr from-electric-purple to-neon-pink text-white flex items-center justify-center shadow-lg shadow-electric-purple/40 -mt-2.5 cursor-pointer ring-4 ring-black">
+        <span class="material-symbols-outlined text-[22px] font-bold" aria-hidden="true">add</span>
+      </button>
+      <a href="#" class="relative flex flex-col items-center justify-center w-12 h-12 text-dark-primary group" aria-current="page" aria-label="Reels">
+        <span class="material-symbols-outlined text-[26px]" style="font-variation-settings: &#39;FILL&#39; 1;">movie</span>
+        <span class="w-1 h-1 rounded-full bg-neon-pink mt-0.5"></span>
+      </a>
+      <a href="profile.html" class="flex flex-col items-center justify-center w-12 h-12" aria-label="Your Profile">
+        <div class="w-6 h-6 rounded-full overflow-hidden ring-1 ring-white/30">
+          <img src="https://lh3.googleusercontent.com/aida/ALJJyrA4600vQecTfr8yi1tix1EbWxbBUO98k5k41HV8Mmz1ZyNN9wFWmmHt7924tWcrPlN9UvjVZyJWY2KbUNXplu7GKaY0lj4l1shGJogZ5jbSbPckS7K8eqB6T2zSIsV9kcIB2KYqR-jid-E_EleSEsTZb1pd_Dljl5_MvUr_tCD9PLTqUjj52Pzxuj2lBl9G1mx9Bl5mDosa_CmuzUOzxoT7kFenuGCoozbsjHvnuc85EnWy" alt="Your avatar" class="w-full h-full object-cover">
+        </div>
+      </a>
+    </nav>
+
+    <!-- Home Indicator -->
+    <div class="fixed bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/30 rounded-full z-50 pointer-events-none"></div>
+
+  </div>
+
+
+
+  <!-- Page Transition Script -->
+  <script>
+    (function() {
+      // Fade in on load
+      document.body.style.opacity = '0';
+      document.body.style.transform = 'translateY(10px)';
+      document.body.style.transition = 'opacity 0.28s ease, transform 0.28s ease';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          document.body.style.opacity = '1';
+          document.body.style.transform = 'translateY(0)';
+        });
+      });
+
+      // Intercept nav + back links
+      document.addEventListener('click', function(e) {
+        var link = e.target.closest('a[href]');
+        if (!link) return;
+        var href = link.getAttribute('href');
+        if (!href || href === '#' || href.startsWith('http') || href.startsWith('mailto')) return;
+        e.preventDefault();
+        // tap scale
+        link.style.transform = 'scale(0.88)';
+        setTimeout(function() { link.style.transform = ''; }, 150);
+        // fade out
+        document.body.style.opacity = '0';
+        document.body.style.transform = 'translateY(-8px)';
+        document.body.style.transition = 'opacity 0.18s ease, transform 0.18s ease';
+        setTimeout(function() { window.location.href = href; }, 200);
+      });
+    })();
+  </script>
+</body></html>

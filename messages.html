@@ -1,0 +1,373 @@
+﻿<!DOCTYPE html><html lang="en" class="dark"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Direct Messages — Pulse</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">/** @type {import('tailwindcss').Config} */
+globalThis.tailwind = globalThis.tailwind || {};
+globalThis.tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'electric-purple': '#8B5CF6',
+        'neon-pink': '#EC4899',
+        'light-primary': '#6D28D9',
+        'light-on-primary': '#FFFFFF',
+        'light-secondary': '#BE185D',
+        'light-on-secondary': '#FFFFFF',
+        'light-surface': '#FAFAFC',
+        'light-on-surface': '#0F172A',
+        'light-surface-container': '#F1F5F9',
+        'light-on-surface-container': '#334155',
+        'light-outline': '#CBD5E1',
+        'light-outline-variant': '#E2E8F0',
+        'dark-primary': '#A78BFA',
+        'dark-on-primary': '#1E1145',
+        'dark-secondary': '#F472B6',
+        'dark-on-secondary': '#4C0519',
+        'dark-surface': '#0D0D12',
+        'dark-on-surface': '#F3F4F6',
+        'dark-surface-container': '#16161F',
+        'dark-on-surface-container': '#E5E7EB',
+        'dark-surface-container-high': '#22222E',
+        'dark-on-surface-container-high': '#FFFFFF',
+        'dark-outline': '#2E2E3E',
+        'dark-outline-variant': '#1E1E2A',
+      },
+      borderRadius: {
+        'sm': '6px',
+        'md': '10px',
+        'lg': '16px',
+        'xl': '20px',
+        'full': '9999px',
+      },
+      spacing: {
+        'xs': '4px',
+        'sm': '8px',
+        'md': '12px',
+        'base': '16px',
+        'lg': '20px',
+        'xl': '24px',
+        '2xl': '32px',
+        'gutter-mobile': '16px',
+        'nav-height': '64px',
+      },
+      fontFamily: {
+        'headline': ['"Red Hat Text"', 'sans-serif'],
+        'body': ['"Instrument Sans"', 'sans-serif'],
+        'label': ['"Instrument Sans"', 'sans-serif'],
+      },
+      fontSize: {
+        'headline-xl': ['36px', { lineHeight: '44px', letterSpacing: '-0.5px', fontWeight: '700' }],
+        'headline-xl-mobile': ['28px', { lineHeight: '34px', letterSpacing: '-0.4px', fontWeight: '700' }],
+        'headline-lg': ['30px', { lineHeight: '38px', letterSpacing: '-0.3px', fontWeight: '700' }],
+        'headline-lg-mobile': ['24px', { lineHeight: '30px', letterSpacing: '-0.2px', fontWeight: '700' }],
+        'headline-sm': ['18px', { lineHeight: '24px', fontWeight: '600' }],
+        'headline-sm-mobile': ['16px', { lineHeight: '22px', fontWeight: '600' }],
+        'body-lg': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+        'body-md': ['14px', { lineHeight: '20px', fontWeight: '400' }],
+        'body-sm': ['12px', { lineHeight: '16px', fontWeight: '400' }],
+        'label-lg': ['14px', { lineHeight: '20px', fontWeight: '600' }],
+        'label-md': ['12px', { lineHeight: '16px', fontWeight: '600' }],
+        'label-sm': ['11px', { lineHeight: '14px', fontWeight: '600' }],
+      },
+      transitionDuration: {
+        'tap': '120ms',
+        'heart-pop': '200ms',
+        'drawer-slide': '250ms',
+      },
+      transitionDelay: {
+        'tap': '0ms',
+        'heart-pop': '0ms',
+        'drawer-slide': '0ms',
+      },
+      transitionTimingFunction: {
+        'tap': 'cubic-bezier(0.4, 0, 0.2, 1)',
+        'heart-pop': 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+        'drawer-slide': 'cubic-bezier(0.2, 0, 0, 1)',
+      },
+    },
+  },
+};
+if (typeof module !== 'undefined') module.exports = globalThis.tailwind.config;
+</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght,ital@400..700,0..1&amp;family=Red+Hat+Text:wght@400..700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet">
+  <style>
+    .material-symbols-outlined, .material-symbols-rounded, .material-symbols-sharp, .material-icons {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      line-height: 1 !important;
+      box-sizing: content-box;
+      overflow: hidden;
+      white-space: nowrap;
+      direction: ltr;
+      vertical-align: middle;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-dark-surface text-dark-on-surface font-body antialiased selection:bg-electric-purple selection:text-white">
+
+  <!-- Mobile Viewport Frame (390px) -->
+  <div class="relative w-full max-w-[390px] mx-auto min-h-[884px] bg-dark-surface flex flex-col justify-between border-x border-dark-outline/40 shadow-2xl" data-stitch-vh="min-h-[884px]===min-h-screen">
+
+    <!-- Header: Status bar & Contextual Chat Navigation -->
+    <header class="sticky top-0 z-30 w-full bg-dark-surface/90 backdrop-blur-md border-b border-dark-outline/40">
+      
+      <!-- iOS Status Bar -->
+      <div class="flex items-center justify-between px-6 pt-3 pb-1 text-label-sm text-dark-on-surface-container select-none">
+        <span class="tracking-tight text-dark-on-surface font-headline font-bold">9:41</span>
+        <div class="flex items-center gap-1.5 text-[14px]">
+          <span class="material-symbols-outlined text-[14px]">signal_cellular_alt</span>
+          <span class="material-symbols-outlined text-[14px]">wifi</span>
+          <span class="material-symbols-outlined text-[16px]">battery_full</span>
+        </div>
+      </div>
+
+      <!-- Messages Header Row -->
+      <div class="flex items-center justify-between px-4 py-2.5">
+        <div class="flex items-center gap-2">
+          <a href="feed.html" aria-label="Back to Feed" class="w-8 h-8 rounded-full flex items-center justify-center text-dark-on-surface hover:text-dark-primary transition-colors">
+            <span class="material-symbols-outlined text-[22px]">arrow_back</span>
+          </a>
+          <div class="flex items-center gap-1.5">
+            <span class="font-headline text-headline-sm-mobile font-bold text-dark-on-surface">kai.lens</span>
+            <span class="material-symbols-outlined text-[16px] text-dark-on-surface-container">expand_more</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button type="button" aria-label="Video Call" class="w-8 h-8 rounded-full flex items-center justify-center text-dark-on-surface hover:text-dark-primary transition-colors">
+            <span class="material-symbols-outlined text-[20px]">videocam</span>
+          </button>
+          <button type="button" aria-label="New Message" class="w-8 h-8 rounded-full flex items-center justify-center text-dark-on-surface hover:text-dark-primary transition-colors">
+            <span class="material-symbols-outlined text-[20px]">edit_square</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="px-4 pb-3">
+        <div class="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-dark-surface-container border border-dark-outline/40">
+          <span class="material-symbols-outlined text-[18px] text-dark-on-surface-container">search</span>
+          <input type="text" placeholder="Search messages..." class="bg-transparent border-0 p-0 text-body-sm text-dark-on-surface placeholder:text-dark-on-surface-container focus:ring-0 w-full">
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Messages List Content -->
+    <main class="flex-1 pb-6">
+
+      <!-- Active Friends Quick Row / Notes Tray -->
+      <section class="py-3 border-b border-dark-outline/30 px-4" aria-label="Active Friends">
+        <div class="flex items-center gap-4 overflow-x-auto no-scrollbar">
+          
+          <!-- Your Note -->
+          <div class="flex flex-col items-center gap-1.5 shrink-0">
+            <div class="relative cursor-pointer">
+              <div class="w-14 h-14 rounded-full p-xs bg-dark-outline overflow-hidden">
+                <img src="https://lh3.googleusercontent.com/aida/ALJJyrA4600vQecTfr8yi1tix1EbWxbBUO98k5k41HV8Mmz1ZyNN9wFWmmHt7924tWcrPlN9UvjVZyJWY2KbUNXplu7GKaY0lj4l1shGJogZ5jbSbPckS7K8eqB6T2zSIsV9kcIB2KYqR-jid-E_EleSEsTZb1pd_Dljl5_MvUr_tCD9PLTqUjj52Pzxuj2lBl9G1mx9Bl5mDosa_CmuzUOzxoT7kFenuGCoozbsjHvnuc85EnWy" alt="Your Avatar" class="w-full h-full object-cover rounded-full">
+              </div>
+              <span class="absolute -top-1.5 -right-1 px-1.5 py-0.5 rounded-full bg-dark-surface-container-high border border-dark-outline text-[9px] font-semibold text-dark-primary">
+                Tokyo ⚡
+              </span>
+            </div>
+            <span data-design-text-token="label-sm" class="text-dark-on-surface-container text-label-sm font-semibold">Your note</span>
+          </div>
+
+          <!-- Elena Active -->
+          <div class="flex flex-col items-center gap-1.5 shrink-0">
+            <div class="relative cursor-pointer">
+              <div class="w-14 h-14 rounded-full p-xs bg-gradient-to-tr from-electric-purple to-neon-pink overflow-hidden">
+                <img src="https://lh3.googleusercontent.com/aida/ALJJyrB79w-PcHBq-VOOZnV6ekF3AzH9hV3jmth7PXj9IHJ7JQ8mJMch5CmUANAJ7AnAG3wCOxqQAym24AE6w7ptgxs2JxFaks1wFA2iAfEZMiPMCdlejqLB3MRDBj6Gpay256-QSd6IucabsjAOpqBohPDuWJJS05NqsJrNnqY6WgsbMQg2XSvjrmLFNR7GiSdB3llLe4Jg1evDCIq4_RmtOa6ZSaerHzcBzdEFY8qP7bl8G8WRgiYq" alt="Elena Vance" class="w-full h-full object-cover rounded-full">
+              </div>
+              <span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-500 ring-2 ring-dark-surface"></span>
+            </div>
+            <span data-design-text-token="label-sm" class="text-dark-on-surface text-label-sm font-semibold">elena.design</span>
+          </div>
+
+          <!-- Marcus Active -->
+          <div class="flex flex-col items-center gap-1.5 shrink-0">
+            <div class="relative cursor-pointer">
+              <div class="w-14 h-14 rounded-full p-xs bg-dark-outline overflow-hidden">
+                <img src="https://lh3.googleusercontent.com/aida/ALJJyrCGkl4tqgn24NUAnbSUQsQgBnbx-b749tMXtIxxA1-yAL1tI-JSenF31c2mF-o0pdS4mes1dNqIFCG6Y1NIXmOkKzwqfEavhtJ8tMmzpw4e_p2a8ZDbJ2kZiZA6TqCAVGq3cMAD_gHfxuYTTudN30uVuptQGSt8sxrOVRArhZBAgfxu2gqjlvJqLLIVrRQV5Uq1N92Gd3I4HDbLxjk0pzv4zKWaeoCPl4wPF928VMXMSJIdIfa1Rw" alt="Marcus Chen" class="w-full h-full object-cover rounded-full">
+              </div>
+              <span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-500 ring-2 ring-dark-surface"></span>
+            </div>
+            <span data-design-text-token="label-sm" class="text-dark-on-surface text-label-sm font-semibold">marcus.raw</span>
+          </div>
+
+          <!-- Chloe -->
+          <div class="flex flex-col items-center gap-1.5 shrink-0">
+            <div class="relative cursor-pointer">
+              <div class="w-14 h-14 rounded-full p-xs bg-dark-outline overflow-hidden">
+                <img src="https://lh3.googleusercontent.com/aida/ALJJyrDrk-21Lo4K8vt13Y1ewJ5o-wNsg7e3Aqu_9oSjS_VUkYxk5kApLK1s4CvMMVNrL6Lse1cO-8ab98KTuRG5i2l-qG-7WL-U7-SEETZxCmfyQ51DPUBB1KMq3bBPxxvwL_jqmUa7qhQJSC2Q11XH9BT8-PjOSrP1eZfOUqFcPt8P6awImg9Ey-4vpl-z1I1o3T_m0MHhhRB_knlwqP-JDjNizAXMK4S84kAv75oK9UHLelihjnw" alt="Chloe" class="w-full h-full object-cover rounded-full">
+              </div>
+            </div>
+            <span data-design-text-token="label-sm" class="text-dark-on-surface-container text-label-sm font-semibold">chloe.v</span>
+          </div>
+
+          <!-- Sofia -->
+          <div class="flex flex-col items-center gap-1.5 shrink-0">
+            <div class="relative cursor-pointer">
+              <div class="w-14 h-14 rounded-full p-xs bg-gradient-to-tr from-electric-purple to-neon-pink overflow-hidden">
+                <img src="https://lh3.googleusercontent.com/aida/ALJJyrCeSrzLn8GPzBVZvTZkTD4g-KcEb9_Mqj7fi7IjHxqPigdd3Ea_Y7XWlzXXTVV5aAP5Usj9SjuidqAI3WX16AdE6PTalUrhS01eM0UO0wu8iuqAZFituXPfPdXUTyD1oPBpxda0_FE1Q7bi9MtT8GPk6IYru-1NzGfgu5reKMIK3fc-isj5wQsOxMfFoaADOdUzLEihIfe7LJx7fdduc04U-lXYfe3Iyu2hjMyu8TsKcTdMR0c" alt="Sofia" class="w-full h-full object-cover rounded-full">
+              </div>
+            </div>
+            <span data-design-text-token="label-sm" class="text-dark-on-surface text-label-sm font-semibold">sofia.art</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Message Threads List -->
+      <section class="px-4 py-2 divide-y divide-dark-outline/30" aria-label="Conversations">
+
+        <!-- Thread 1 (Unread with active indicator) -->
+        <a href="#" class="flex items-center justify-between py-3.5 group hover:bg-dark-surface-container/50 -mx-2 px-2 rounded-lg transition-colors">
+          <div class="flex items-center gap-3">
+            <div class="relative w-12 h-12 rounded-full overflow-hidden shrink-0">
+              <img src="https://lh3.googleusercontent.com/aida/ALJJyrB79w-PcHBq-VOOZnV6ekF3AzH9hV3jmth7PXj9IHJ7JQ8mJMch5CmUANAJ7AnAG3wCOxqQAym24AE6w7ptgxs2JxFaks1wFA2iAfEZMiPMCdlejqLB3MRDBj6Gpay256-QSd6IucabsjAOpqBohPDuWJJS05NqsJrNnqY6WgsbMQg2XSvjrmLFNR7GiSdB3llLe4Jg1evDCIq4_RmtOa6ZSaerHzcBzdEFY8qP7bl8G8WRgiYq" alt="Elena Vance" class="w-full h-full object-cover">
+              <span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-dark-surface"></span>
+            </div>
+            <div class="space-y-0.5">
+              <div class="flex items-center gap-1.5">
+                <span data-design-text-token="label-md" class="text-dark-on-surface text-label-md font-bold">elena.design</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-neon-pink"></span>
+              </div>
+              <p data-design-text-token="body-sm" class="text-dark-on-surface font-semibold text-body-sm line-clamp-1">
+                Sent you a 4K photo • Just now
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-col items-end gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-electric-purple shadow-sm shadow-electric-purple"></span>
+            <span class="material-symbols-outlined text-[18px] text-dark-on-surface-container">photo_camera</span>
+          </div>
+        </a>
+
+        <!-- Thread 2 (Unread) -->
+        <a href="#" class="flex items-center justify-between py-3.5 group hover:bg-dark-surface-container/50 -mx-2 px-2 rounded-lg transition-colors">
+          <div class="flex items-center gap-3">
+            <div class="relative w-12 h-12 rounded-full overflow-hidden shrink-0">
+              <img src="https://lh3.googleusercontent.com/aida/ALJJyrCGkl4tqgn24NUAnbSUQsQgBnbx-b749tMXtIxxA1-yAL1tI-JSenF31c2mF-o0pdS4mes1dNqIFCG6Y1NIXmOkKzwqfEavhtJ8tMmzpw4e_p2a8ZDbJ2kZiZA6TqCAVGq3cMAD_gHfxuYTTudN30uVuptQGSt8sxrOVRArhZBAgfxu2gqjlvJqLLIVrRQV5Uq1N92Gd3I4HDbLxjk0pzv4zKWaeoCPl4wPF928VMXMSJIdIfa1Rw" alt="Marcus Chen" class="w-full h-full object-cover">
+            </div>
+            <div class="space-y-0.5">
+              <span data-design-text-token="label-md" class="text-dark-on-surface text-label-md font-bold">marcus.raw</span>
+              <p data-design-text-token="body-sm" class="text-dark-on-surface font-semibold text-body-sm line-clamp-1">
+                The lighting in that pavilion shot is unreal! 🔥
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-col items-end gap-1.5">
+            <span class="text-label-sm text-dark-primary font-bold">14m</span>
+            <span class="w-2 h-2 rounded-full bg-neon-pink"></span>
+          </div>
+        </a>
+
+        <!-- Thread 3 (Read) -->
+        <a href="#" class="flex items-center justify-between py-3.5 group hover:bg-dark-surface-container/50 -mx-2 px-2 rounded-lg transition-colors">
+          <div class="flex items-center gap-3">
+            <div class="relative w-12 h-12 rounded-full overflow-hidden shrink-0">
+              <img src="https://lh3.googleusercontent.com/aida/ALJJyrDrk-21Lo4K8vt13Y1ewJ5o-wNsg7e3Aqu_9oSjS_VUkYxk5kApLK1s4CvMMVNrL6Lse1cO-8ab98KTuRG5i2l-qG-7WL-U7-SEETZxCmfyQ51DPUBB1KMq3bBPxxvwL_jqmUa7qhQJSC2Q11XH9BT8-PjOSrP1eZfOUqFcPt8P6awImg9Ey-4vpl-z1I1o3T_m0MHhhRB_knlwqP-JDjNizAXMK4S84kAv75oK9UHLelihjnw" alt="Chloe" class="w-full h-full object-cover opacity-90">
+            </div>
+            <div class="space-y-0.5">
+              <div class="flex items-center gap-1.5">
+                <span data-design-text-token="label-md" class="text-dark-on-surface text-label-md">chloe.v</span>
+                <span class="material-symbols-outlined text-[13px] text-dark-primary">verified</span>
+              </div>
+              <p data-design-text-token="body-sm" class="text-dark-on-surface-container text-body-sm line-clamp-1">
+                Shared a reel: Cyberpunk Noir Chapter II
+              </p>
+            </div>
+          </div>
+          <span class="text-label-sm text-dark-on-surface-container">2h</span>
+        </a>
+
+        <!-- Thread 4 (Read) -->
+        <a href="#" class="flex items-center justify-between py-3.5 group hover:bg-dark-surface-container/50 -mx-2 px-2 rounded-lg transition-colors">
+          <div class="flex items-center gap-3">
+            <div class="relative w-12 h-12 rounded-full overflow-hidden shrink-0">
+              <img src="https://lh3.googleusercontent.com/aida/ALJJyrCeSrzLn8GPzBVZvTZkTD4g-KcEb9_Mqj7fi7IjHxqPigdd3Ea_Y7XWlzXXTVV5aAP5Usj9SjuidqAI3WX16AdE6PTalUrhS01eM0UO0wu8iuqAZFituXPfPdXUTyD1oPBpxda0_FE1Q7bi9MtT8GPk6IYru-1NzGfgu5reKMIK3fc-isj5wQsOxMfFoaADOdUzLEihIfe7LJx7fdduc04U-lXYfe3Iyu2hjMyu8TsKcTdMR0c" alt="Sofia" class="w-full h-full object-cover opacity-90">
+            </div>
+            <div class="space-y-0.5">
+              <span data-design-text-token="label-md" class="text-dark-on-surface text-label-md">sofia.art</span>
+              <p data-design-text-token="body-sm" class="text-dark-on-surface-container text-body-sm line-clamp-1">
+                Are you joining the gallery opening this Friday?
+              </p>
+            </div>
+          </div>
+          <span class="text-label-sm text-dark-on-surface-container">1d</span>
+        </a>
+
+      </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar (Matched App Shell Parity) -->
+    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[390px] h-16 bg-dark-surface/95 backdrop-blur-xl border-t border-dark-outline/40 z-40 px-3 flex items-center justify-around" aria-label="Primary Navigation">
+      <a href="feed.html" class="flex flex-col items-center justify-center w-12 h-12 text-dark-on-surface-container hover:text-dark-on-surface" aria-label="Home Feed">
+        <span class="material-symbols-outlined text-[24px]">home</span>
+      </a>
+      <a href="explore.html" class="flex flex-col items-center justify-center w-12 h-12 text-dark-on-surface-container hover:text-dark-on-surface" aria-label="Search and Explore">
+        <span class="material-symbols-outlined text-[24px]">search</span>
+      </a>
+      <button type="button" aria-label="Create Post" class="w-11 h-11 rounded-full bg-gradient-to-tr from-electric-purple to-neon-pink text-white flex items-center justify-center shadow-lg shadow-electric-purple/40 -mt-2.5 cursor-pointer ring-4 ring-dark-surface">
+        <span class="material-symbols-outlined text-[22px] font-bold" aria-hidden="true">add</span>
+      </button>
+      <a href="reels.html" class="flex flex-col items-center justify-center w-12 h-12 text-dark-on-surface-container hover:text-dark-on-surface" aria-label="Reels">
+        <span class="material-symbols-outlined text-[24px]">movie</span>
+      </a>
+      <a href="profile.html" class="flex flex-col items-center justify-center w-12 h-12" aria-label="Your Profile">
+        <div class="w-6 h-6 rounded-full overflow-hidden ring-1 ring-dark-outline">
+          <img src="https://lh3.googleusercontent.com/aida/ALJJyrA4600vQecTfr8yi1tix1EbWxbBUO98k5k41HV8Mmz1ZyNN9wFWmmHt7924tWcrPlN9UvjVZyJWY2KbUNXplu7GKaY0lj4l1shGJogZ5jbSbPckS7K8eqB6T2zSIsV9kcIB2KYqR-jid-E_EleSEsTZb1pd_Dljl5_MvUr_tCD9PLTqUjj52Pzxuj2lBl9G1mx9Bl5mDosa_CmuzUOzxoT7kFenuGCoozbsjHvnuc85EnWy" alt="Your avatar" class="w-full h-full object-cover">
+        </div>
+      </a>
+    </nav>
+
+    <!-- Home Indicator -->
+    <div class="fixed bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/20 rounded-full z-50 pointer-events-none"></div>
+
+  </div>
+
+
+
+  <!-- Page Transition Script -->
+  <script>
+    (function() {
+      // Fade in on load
+      document.body.style.opacity = '0';
+      document.body.style.transform = 'translateY(10px)';
+      document.body.style.transition = 'opacity 0.28s ease, transform 0.28s ease';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          document.body.style.opacity = '1';
+          document.body.style.transform = 'translateY(0)';
+        });
+      });
+
+      // Intercept nav + back links
+      document.addEventListener('click', function(e) {
+        var link = e.target.closest('a[href]');
+        if (!link) return;
+        var href = link.getAttribute('href');
+        if (!href || href === '#' || href.startsWith('http') || href.startsWith('mailto')) return;
+        e.preventDefault();
+        // tap scale
+        link.style.transform = 'scale(0.88)';
+        setTimeout(function() { link.style.transform = ''; }, 150);
+        // fade out
+        document.body.style.opacity = '0';
+        document.body.style.transform = 'translateY(-8px)';
+        document.body.style.transition = 'opacity 0.18s ease, transform 0.18s ease';
+        setTimeout(function() { window.location.href = href; }, 200);
+      });
+    })();
+  </script>
+</body></html>
